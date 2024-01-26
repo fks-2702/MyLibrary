@@ -1,46 +1,48 @@
-import { StyleSheet, Text, ScrollView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import axios from 'axios'; // Import axios
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, ScrollView, View } from 'react-native';
+import axios from 'axios';
 import SETTINGS from './config.json';
-//import PieChart from 'mui';
-
-
+//import Pie from 'react-native-pie';
 
 export default function InfoScreen() {
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: '#fff',
-        },
-    });
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+    },
+    chartContainer: {
+      alignItems: 'center',
+      marginTop: 20,
+    },
+  });
 
-    const [data, setData] = useState(null); // State to store the API response
+  const [data, setData] = useState(null);
 
-    const getAVG = async () => {
-        try {
-            const response = await axios.get(`http://${SETTINGS.server_address}:${SETTINGS.server_port}/api/stats`);
-            console.log(response.data);
-            setData(response.data); // Update state with the API response
-        } catch (error) {
-            console.error(error);
-            alert(`Error getting data`);
-        }
-    };
+  const getAVG = async () => {
+    try {
+      const response = await axios.get(`http://${SETTINGS.server_address}:${SETTINGS.server_port}/api/stats`);
+      console.log(response.data);
+      setData(response.data);
+    } catch (error) {
+      console.error(error);
+      alert(`Error getting data`);
+    }
+  };
 
-    useLayoutEffect(() => {
-        getAVG();
-    }, []);
+  useEffect(() => {
+    getAVG();
+  }, []);
 
-    return (
-        <ScrollView style={styles.container}>
-            {data && (
-                <>
-                    <Text>Average book length: {data.avg}</Text>
+  return (
+    <ScrollView style={styles.container}>
+      {data && (
+        <>
+          <Text>Average book length: {data.avg}</Text>
+          <View style={styles.chartContainer}>
 
-                </>
-            )}
-        </ScrollView>
-    );
+          </View>
+        </>
+      )}
+    </ScrollView>
+  );
 }

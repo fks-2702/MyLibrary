@@ -24,3 +24,7 @@ MyLibrary is a mobile application that allows you to manage and scan your book l
 
    ```bash
    git clone https://github.com/fks-2702/MyLibrary.git
+2. **Change directory into the project directory**
+    ```bash
+    cd MyLibrary
+3. **Start the docker container**
