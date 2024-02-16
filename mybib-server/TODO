@@ -1,0 +1,5 @@
+- Build reccomendation engine
+  - Multi-strategy approach to ranking
+  - Description comparison via cos similarity between DOC2VEC vectors
+  - KNN with similar user profils
+  - reinforcement learning based on user feedback
